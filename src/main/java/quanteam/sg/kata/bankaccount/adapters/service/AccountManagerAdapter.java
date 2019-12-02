@@ -65,6 +65,6 @@ public class AccountManagerAdapter implements AccountManager {
 
     @Override
     public List<AccountStatement> getHistory(long accountId) {
-        return this.accountStatementRepository.findByAccount_Id(accountId);
+        return this.accountStatementRepository.findByAccountId(accountId);
     }
 }

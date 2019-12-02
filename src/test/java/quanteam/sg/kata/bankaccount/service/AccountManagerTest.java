@@ -1,10 +1,9 @@
 package quanteam.sg.kata.bankaccount.service;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.InjectMocks;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import quanteam.sg.kata.bankaccount.adapters.persistence.AccountRepository;
@@ -12,7 +11,6 @@ import quanteam.sg.kata.bankaccount.adapters.persistence.AccountStatementReposit
 import quanteam.sg.kata.bankaccount.adapters.service.AccountManagerAdapter;
 import quanteam.sg.kata.bankaccount.domain.exception.AccountNotFoundException;
 import quanteam.sg.kata.bankaccount.domain.exception.OperationDeniedException;
-import quanteam.sg.kata.bankaccount.domain.handler.AccountManager;
 import quanteam.sg.kata.bankaccount.domain.model.OperationType;
 import quanteam.sg.kata.bankaccount.domain.model.entity.Account;
 import quanteam.sg.kata.bankaccount.domain.model.entity.AccountStatement;
@@ -28,10 +26,10 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class AccountManagerTest {
 
-    private AccountManager accountManager;
+	@InjectMocks
+    private AccountManagerAdapter accountManager;
 
     @MockBean
     private AccountRepository accountRepository;
@@ -115,7 +113,7 @@ public class AccountManagerTest {
 
     @Test
     public void shouldGetHistoryOnSuccess(){
-        when(accountStatementRepository.findByAccount_Id(anyLong())).thenReturn(new ArrayList<>());
+        when(accountStatementRepository.findByAccountId(anyLong())).thenReturn(new ArrayList<>());
         assertTrue(accountManager.getHistory(1).isEmpty());
     }
 

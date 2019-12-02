@@ -1,18 +1,21 @@
 package quanteam.sg.kata.bankaccount.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import quanteam.sg.kata.bankaccount.adapters.web.AccountController;
+import quanteam.sg.kata.bankaccount.adapters.web.AccountInterceptorController;
 import quanteam.sg.kata.bankaccount.domain.exception.AccountNotFoundException;
 import quanteam.sg.kata.bankaccount.domain.exception.OperationDeniedException;
 import quanteam.sg.kata.bankaccount.domain.handler.AccountManager;
@@ -33,21 +36,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@WebMvcTest(controllers = AccountController.class)
+@ContextConfiguration(classes = {AccountController.class, AccountInterceptorController.class})
 public class AccountControllerTest {
 
+	@Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    private AccountController accountController;
     @MockBean
     private AccountManager accountManager;
+    
 
     @Before
     public void setUp(){
-        this.accountController = new AccountController(accountManager);
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 

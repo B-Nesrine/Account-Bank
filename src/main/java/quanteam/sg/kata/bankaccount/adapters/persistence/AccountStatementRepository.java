@@ -6,5 +6,5 @@ import quanteam.sg.kata.bankaccount.domain.model.entity.AccountStatement;
 import java.util.List;
 
 public interface AccountStatementRepository extends JpaRepository<AccountStatement,Long> {
-    List<AccountStatement> findByAccount_Id(long id);
+    List<AccountStatement> findByAccountId(long id);
 }

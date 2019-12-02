@@ -13,6 +13,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class BankAccountApplication implements ApplicationRunner {
 
+	/**
+	 * TO CREATE OUR FIRST ACCOUNT
+	 */
     @Autowired
     private AccountRepository accountRepository;
 
