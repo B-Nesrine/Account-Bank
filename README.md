@@ -12,7 +12,7 @@ mvn spring-boot:run
 # How to Check the database table
 
 This project use H2 database. 
-After running the project, the ** first Acount with a total balance = 1000 ** will be created.
+After running the project, the **first Acount with a total balance = 1000** will be created.
 
 To check the database table go to : [http://localhost:8080/h2-console/](http://localhost:8080/h2-console/)
 
